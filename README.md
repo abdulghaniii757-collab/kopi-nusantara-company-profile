@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kopi Nusantara — Company Profile (Next.js)
 
-## Getting Started
+Website company profile kedai **Kopi Nusantara**, dibangun dengan Next.js 16 (App Router), TypeScript, dan Bootstrap 5.
 
-First, run the development server:
+Abdul Ghani · 535250073 · Front-End Programming (TK23023) · Tugas 4 Praktikum
+
+## Menjalankan
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Halaman
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| URL | Keterangan |
+| --- | --- |
+| `/` | Beranda: hero, keunggulan, menu unggulan |
+| `/menu` | Daftar semua menu (kopi & non-kopi) |
+| `/menu/[slug]` | Detail menu (dynamic route), contoh `/menu/kopi-tubruk-gayo` |
+| `/tentang` | Visi, misi, dan perjalanan kedai |
+| `/kontak` | Alamat, jam buka, dan FAQ |
 
-## Learn More
+## Pemenuhan ketentuan tugas
 
-To learn more about Next.js, take a look at the following resources:
+1. **Beberapa halaman company profile**: Beranda, Menu, Detail Menu, Tentang, Kontak.
+2. **Dynamic routing**: `app/menu/[slug]/page.tsx` + `generateStaticParams`, slug tidak dikenal menampilkan `not-found.tsx`.
+3. **Reusable components**: `MenuCard`, `InfoCard` (pola children), `PageHeader`, `Navbar`, `Footer`.
+4. **Navigasi dengan `<Link>`**: semua navigasi memakai `next/link`.
+5. **Active link styling**: `Navbar` memakai `usePathname()`; link "Menu" tetap aktif di halaman detail menu.
+6. **Responsif**: grid Bootstrap (`col-12 col-md-6 col-lg-4`), navbar collapse di layar kecil.
+7. **Struktur folder rapi**: lihat di bawah.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Struktur folder
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/
+├─ layout.tsx          # layout global: Bootstrap, Navbar, Footer
+├─ page.tsx            # /
+├─ globals.css         # CSS global (menimpa variabel Bootstrap)
+├─ not-found.tsx       # halaman 404
+├─ menu/page.tsx       # /menu
+├─ menu/[slug]/page.tsx# /menu/:slug (dynamic route)
+├─ tentang/page.tsx    # /tentang
+└─ kontak/page.tsx     # /kontak
+components/            # komponen yang dipakai ulang
+lib/menu.ts            # data menu + fungsi bantu
+types/bootstrap.d.ts   # deklarasi modul JS Bootstrap
+public/images/         # gambar statis
+```
